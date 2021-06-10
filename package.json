@@ -15,9 +15,10 @@
         "@babel/preset-env": "^7.14.2",
         "@babel/preset-react": "^7.13.13",
         "@hot-loader/react-dom": "^17.0.1",
-        "@types/chrome": "^0.0.142",
+        "@types/chrome": "^0.0.145",
         "@types/react": "^17.0.7",
         "@types/react-dom": "^17.0.5",
+        "@types/react-inspector": "^4.0.1",
         "@typescript-eslint/eslint-plugin": "^4.25.0",
         "@typescript-eslint/parser": "^4.25.0",
         "babel-loader": "^8.2.2",
@@ -47,6 +48,7 @@
         "@material-ui/icons": "^4.11.2",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
-        "react-hot-loader": "^4.13.0"
+        "react-hot-loader": "^4.13.0",
+        "react-inspector": "^5.1.1"
     }
 }

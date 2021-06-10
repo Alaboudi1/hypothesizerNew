@@ -10,7 +10,9 @@ const config = {
         background: path.join(__dirname, 'src/extention/background.ts'),
     },
     mode: 'development',
+
     output: { path: path.join(__dirname, 'dist'), filename: '[name].js' },
+    devtool: 'inline-source-map',
     module: {
         rules: [
             {

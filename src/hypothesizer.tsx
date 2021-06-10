@@ -3,7 +3,7 @@ import * as ReactDOM from 'react-dom'
 
 import App from './UI/App'
 import './hypothesizer.css'
-import { initializeHypothesizer } from './devtools/trace'
+import { initializeHypothesizer } from './devtools/connector'
 
 initializeHypothesizer()
 
