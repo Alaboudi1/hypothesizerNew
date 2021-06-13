@@ -1,14 +1,18 @@
 import * as React from 'react'
 import './App.css'
-import { ObjectInspector, TableInspector } from 'react-inspector'
+import ReactJson from 'react-json-view'
 
-export const Context: any = (props: any): React.ReactElement => {
-    const { context } = props
-    console.log(context)
+export const Context: React.FC<MethodCoverageProps> = ({ coverage }) => {
+    if (coverage.length === 0) return <></>
     return (
         <div>
-            <ObjectInspector data={context} />
-            <TableInspector data={context} />
+            <h4>Execution trace:</h4>
+            <ReactJson
+                src={coverage}
+                theme="bright:inverted"
+                collapsed
+                displayDataTypes={false}
+            />
         </div>
     )
 }

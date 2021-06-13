@@ -1,4 +1,4 @@
-const activeTab: number = chrome.devtools.inspectedWindow.tabId
+const { tabId } = chrome.devtools.inspectedWindow
 
 type debuggingState = 'attach' | 'detach'
 
@@ -7,21 +7,23 @@ const sendDebuggerCommand = async (
     param?: Record<string, unknown>
 ): Promise<any> =>
     new Promise((resolve) =>
-        chrome.debugger.sendCommand(
-            { tabId: activeTab },
-            command,
-            param,
-            (result: any) => resolve(result)
+        chrome.debugger.sendCommand({ tabId }, command, param, (result: any) =>
+            resolve(result)
         )
     )
 
 const debuggingLifeCycles = (command: debuggingState): Promise<void> =>
     new Promise((resolve) =>
         command === 'attach'
-            ? chrome.debugger.attach({ tabId: activeTab }, '1.2', () =>
-                  resolve()
-              )
-            : chrome.debugger.detach({ tabId: activeTab }, () => resolve())
+            ? chrome.debugger.attach({ tabId }, '1.2', () => {
+                  chrome.debugger.onDetach.addListener((d, r) => {
+                      console.log('detached', d, r)
+                  })
+                  return resolve()
+              })
+            : chrome.debugger.detach({ tabId }, () => {
+                  return resolve()
+              })
     )
 
 const startProfiler = async (): Promise<void> => {
@@ -40,6 +42,7 @@ const endProfiler = async (): Promise<any> => {
     await sendDebuggerCommand('Profiler.stop')
     await sendDebuggerCommand('Profiler.disable')
     await debuggingLifeCycles('detach')
+
     const methodCoverage: any[] = response.result
         .filter((file: any) => file.url.includes('localhost'))
         .map((file: any) =>
@@ -48,4 +51,5 @@ const endProfiler = async (): Promise<any> => {
         .flat()
     return Promise.resolve(methodCoverage)
 }
+
 export { startProfiler, endProfiler }
