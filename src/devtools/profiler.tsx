@@ -1,5 +1,6 @@
-const { tabId } = chrome.devtools.inspectedWindow
+import { useCallback } from 'react'
 
+const { tabId } = chrome.devtools.inspectedWindow
 type debuggingState = 'attach' | 'detach'
 
 const sendDebuggerCommand = async (
@@ -12,13 +13,15 @@ const sendDebuggerCommand = async (
         )
     )
 
-const debuggingLifeCycles = (command: debuggingState): Promise<void> =>
+const debuggingLifeCycles = (
+    command: debuggingState,
+    callback?: any
+): Promise<void> =>
     new Promise((resolve) =>
         command === 'attach'
-            ? chrome.debugger.attach({ tabId }, '1.2', () => {
-                  chrome.debugger.onDetach.addListener((d, r) => {
-                      console.log('detached', d, r)
-                  })
+            ? chrome.debugger.attach({ tabId }, '1.3', () => {
+                  chrome.debugger.onDetach.addListener(callback)
+
                   return resolve()
               })
             : chrome.debugger.detach({ tabId }, () => {
@@ -26,8 +29,8 @@ const debuggingLifeCycles = (command: debuggingState): Promise<void> =>
               })
     )
 
-const startProfiler = async (): Promise<void> => {
-    await debuggingLifeCycles('attach')
+const startProfiler = async (callback: any): Promise<void> => {
+    await debuggingLifeCycles('attach', callback)
     await sendDebuggerCommand('Profiler.enable')
     await sendDebuggerCommand('Profiler.start')
     await sendDebuggerCommand('Profiler.startPreciseCoverage', {

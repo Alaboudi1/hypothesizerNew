@@ -1,8 +1,8 @@
 import * as React from 'react'
 import './App.css'
-import { Context } from './Context'
-import Recorder from './Recorder'
-
+import { Context } from './Context/Trace'
+import Recorder from './Context/Recorder'
+import { Questions } from './Context/Questions'
 const App: React.FC = (): React.ReactElement => {
     const [methodCoverage, setMethodCoverage] = React.useState<
         Array<MethodCoverage>
@@ -13,6 +13,7 @@ const App: React.FC = (): React.ReactElement => {
             <h3> Please click RECORD button and reporduce the defect.</h3>
             <Recorder setMethodCoverage={setMethodCoverage} />
             <Context coverage={methodCoverage} />
+            <Questions />
         </div>
     )
 }

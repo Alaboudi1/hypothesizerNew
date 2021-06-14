@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button'
 import Video from '@material-ui/icons/Videocam'
 import Paus from '@material-ui/icons/Pause'
 
-import { endProfiler, startProfiler } from '../devtools/profiler'
+import { endProfiler, startProfiler } from '../../devtools/profiler'
 
 const Recorder: React.FC<RecorderProps> = ({
     setMethodCoverage,
@@ -16,7 +16,7 @@ const Recorder: React.FC<RecorderProps> = ({
             const coverage: any = await endProfiler()
             setMethodCoverage(coverage)
         } else {
-            await startProfiler()
+            await startProfiler(() => setRecordingState(false))
         }
         setRecordingState(!isRecording)
     }
