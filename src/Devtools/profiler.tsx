@@ -1,5 +1,3 @@
-import { useCallback } from 'react'
-
 const { tabId } = chrome.devtools.inspectedWindow
 type debuggingState = 'attach' | 'detach'
 

@@ -6,8 +6,8 @@ const CopyPlugin = require('copy-webpack-plugin')
 const config = {
     entry: {
         hypothesizer: path.join(__dirname, 'src/hypothesizer.tsx'),
-        content: path.join(__dirname, 'src/extention/content.ts'),
-        background: path.join(__dirname, 'src/extention/background.ts'),
+        content: path.join(__dirname, 'src/Extention/content.ts'),
+        background: path.join(__dirname, 'src/Extention/background.ts'),
     },
     mode: 'development',
 

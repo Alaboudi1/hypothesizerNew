@@ -2,8 +2,8 @@ import * as React from 'react'
 import './Trace.css'
 import ReactJson from 'react-json-view'
 
-export const Context: React.FC<MethodCoverageProps> = ({ coverage }) => {
-    if (coverage.length === 0) return <>No tracre was collected!</>
+export const Trace: React.FC<MethodCoverageProps> = ({ coverage }) => {
+    if (coverage.length === 0) return <>No trace was collected!</>
     return (
         <div>
             <h4>Execution trace:</h4>

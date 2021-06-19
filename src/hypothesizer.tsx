@@ -1,9 +1,9 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 
-import App from './UI/App'
+import { App } from './UI/App'
 import './hypothesizer.css'
-import { initializeHypothesizer } from './devtools/connector'
+import { initializeHypothesizer } from './Devtools/connector'
 
 initializeHypothesizer()
 

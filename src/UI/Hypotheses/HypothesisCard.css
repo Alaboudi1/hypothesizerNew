@@ -1,0 +1,18 @@
+.root {
+    grid-column: 2;
+    text-align: start;
+}
+.bullet {
+    display: inline-block;
+    margin: 2;
+    transform: scale(0.8);
+}
+.title {
+    font-size: 140;
+}
+.TestHypothesis {
+    padding: 0px !important;
+}
+.Accordion {
+    width: 100%;
+}

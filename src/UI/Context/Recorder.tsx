@@ -2,9 +2,9 @@ import * as React from 'react'
 import './Recorder.css'
 import Button from '@material-ui/core/Button'
 import Video from '@material-ui/icons/Videocam'
-import Paus from '@material-ui/icons/Pause'
+import Pause from '@material-ui/icons/Pause'
 
-import { endProfiler, startProfiler } from '../../devtools/profiler'
+import { endProfiler, startProfiler } from '../../Devtools/profiler'
 
 const Recorder: React.FC<RecorderProps> = ({
     setMethodCoverage,
@@ -27,7 +27,7 @@ const Recorder: React.FC<RecorderProps> = ({
                     variant="contained"
                     color="secondary"
                     onClick={recorder}
-                    startIcon={<Paus />}
+                    startIcon={<Pause />}
                     size="large"
                     className="recording"
                 >
