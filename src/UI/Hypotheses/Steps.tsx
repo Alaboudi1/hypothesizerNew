@@ -13,9 +13,9 @@ import FindInPageIcon from '@material-ui/icons/FindInPage'
 import IconButton from '@material-ui/core/IconButton'
 import Badge from '@material-ui/core/Badge'
 
-export const HypothesisCard: React.FC<any> = ({
-    step: any,
-    title: string,
+export const HypothesisCard: React.FC<HypothesisCard> = ({
+    Hypothesis,
+    index,
 }): React.ReactElement => {
     return (
         <CardActions className="Step">
@@ -30,7 +30,7 @@ export const HypothesisCard: React.FC<any> = ({
                 <AccordionDetails>
                     <Typography>
                         <CopyBlock
-                            text={step.code}
+                            text={Hypothesis.test[0].code}
                             language="jsx"
                             showLineNumbers={false}
                             theme={dracula}

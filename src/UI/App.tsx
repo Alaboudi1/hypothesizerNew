@@ -67,7 +67,7 @@ export const App: React.FC = (): React.ReactElement => {
         Array<MethodCoverage>
     >([])
     const [userReports, setUserReports] = React.useState<Array<unknown>>([])
-    const [hypotheses, setHypotheses] = React.useState<Array<unknown>>([])
+    const [hypotheses, setHypotheses] = React.useState<Array<Hypothesis>>([])
 
     return (
         <div className="App">
@@ -82,10 +82,7 @@ export const App: React.FC = (): React.ReactElement => {
             )}
             <div className="Hypotheses">
                 {hypotheses.map((hypothesis, index) => (
-                    <HypothesisCard
-                        hypothesisCard={hypothesis}
-                        index={index + 1}
-                    />
+                    <HypothesisCard Hypothesis={hypothesis} index={index + 1} />
                 ))}
             </div>
         </div>

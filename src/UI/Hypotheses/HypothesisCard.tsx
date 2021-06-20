@@ -13,8 +13,8 @@ import FindInPageIcon from '@material-ui/icons/FindInPage'
 import IconButton from '@material-ui/core/IconButton'
 import Badge from '@material-ui/core/Badge'
 
-export const HypothesisCard: React.FC<any> = ({
-    hypothesisCard,
+export const HypothesisCard: React.FC<HypothesisCard> = ({
+    Hypothesis,
     index,
 }): React.ReactElement => {
     return (
@@ -29,9 +29,9 @@ export const HypothesisCard: React.FC<any> = ({
                     </IconButton>
                 </Typography>
                 <Typography variant="h5" component="div">
-                    {hypothesisCard.title}
+                    {Hypothesis.title}
                 </Typography>
-                <Typography>{hypothesisCard.hypothesis}</Typography>
+                <Typography>{Hypothesis.description}</Typography>
                 <Typography color="error">Evidence:</Typography>
             </CardContent>
             <CardActions className="TestHypothesis">

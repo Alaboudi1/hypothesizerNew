@@ -13,40 +13,29 @@ type RecorderProps = {
     setMethodCoverage: React.Dispatch<React.SetStateAction<MethodCoverage[]>>
 }
 
-type TestHypothesis = {
-    item: string,
-    code: string,
+type step = {
+    item: string
+    code: string
 }
 type EvidenceOfHypothesis = {
-    type: 'API' | 'AST',
-    value: string,
-    shouldBeThere: boolean,
+    type: 'API' | 'AST'
+    value: string
+    shouldBeThere: boolean
     location: 'userLand' | 'lib'
 }
-type Hypotheses = {
+type potentialFix = {
+    context?: Array<EvidenceOfHypothesis>
+    steps: Array<step>
+}
+type Hypothesis = {
+    title: string
+    description: string
+    test: Array<step>
+    evidence: Array<EvidenceOfHypothesis>
+    potentialFixes: Array<potentialFix>
+}
 
-    {
-        title: string,
-        hypothesis: string,
-        test: Array<TestHypothesis>,
-        evidence: Array<EvidenceOfHypothesis>,
-        potentialFixes: [
-            {
-                context: [
-                    {
-                        type: 'API',
-                        value: 'splice',
-                        shouldBeThere: true,
-                        location: 'userLand',
-                    },
-                    {
-                        type: 'API',
-                        value: 'indexOf',
-                        shouldBeThere: true,
-                        location: 'userLand',
-                    },
-                ],
-            },
-        ],
-    }
+type HypothesisCard = {
+    Hypothesis: Hypothesis
+    index: number
 }
