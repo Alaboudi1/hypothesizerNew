@@ -4,38 +4,49 @@ type MethodCoverage = {
     end: number
     file: string
 }
-
 type MethodCoverageProps = {
     coverage: Array<MethodCoverage>
+}
+type DefectContext = MethodCoverageProps & {
+    userReport: string
 }
 
 type RecorderProps = {
     setMethodCoverage: React.Dispatch<React.SetStateAction<MethodCoverage[]>>
 }
 
-type step = {
-    item: string
-    code: string
+type Hypothesis = {
+    title: string
+    description: string
+    debuggingAids: Array<DebuggingAid>
 }
-type EvidenceOfHypothesis = {
+type DebuggingAid = {
+    context?: Array<SourceCodeEvidence>
+    aidType:
+        | 'Testing Strategies'
+        | 'Potential Fixes'
+        | 'Online Resources'
+        | 'Evidence'
+    steps: Array<Step>
+}
+type SourceCodeEvidence = {
     type: 'API' | 'AST'
     value: string
     shouldBeThere: boolean
     location: 'userLand' | 'lib'
 }
-type potentialFix = {
-    context?: Array<EvidenceOfHypothesis>
-    steps: Array<step>
+type Step = {
+    item: string
+    code?: {
+        syntax: string
+        location?: {
+            lineNumber: number
+            fileName: string
+            functionName: string
+        }
+    }
 }
-type Hypothesis = {
-    title: string
-    description: string
-    test: Array<step>
-    evidence: Array<EvidenceOfHypothesis>
-    potentialFixes: Array<potentialFix>
-}
-
-type HypothesisCard = {
+type HypothesisCardProps = {
     Hypothesis: Hypothesis
     index: number
 }

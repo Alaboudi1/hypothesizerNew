@@ -1,13 +1,15 @@
-const constructQuery = (defectContext: unknown): unknown => {
-    return defectContext
+import { ConstructingHypotheses } from './GenerateHypotheses'
+
+const constructQuery = (defectContext: DefectContext): string => {
+    return 'defectContext'
 }
 
 export const searchForPotentialHypotheses = async (
-    defectContext: unknown
-): Promise<unknown> => {
+    defectContext: DefectContext
+): Promise<Array<Hypothesis>> => {
     // mocking the database here.
     const query = constructQuery(defectContext) // construct the query.
-    return new Promise((resolve) =>
+    const rowHypotheses = await new Promise((resolve) =>
         setTimeout(
             () =>
                 resolve([
@@ -83,4 +85,5 @@ export const searchForPotentialHypotheses = async (
             500
         )
     )
+    return ConstructingHypotheses(rowHypotheses)
 }

@@ -10,25 +10,26 @@ import { searchForPotentialHypotheses } from '../Utils/Database'
 import { HypothesisCard } from './Hypotheses/HypothesisCard'
 
 const searchForHypotheses = async (
-    userReports: unknown,
-    methodCoverage: unknown,
-    setLoading: any,
-    setHypotheses: any
-): Promise<any> => {
+    userReport: string,
+    coverage: Array<MethodCoverage>,
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>,
+    setHypotheses: React.Dispatch<React.SetStateAction<Array<Hypothesis>>>
+): Promise<void> => {
     // connect to a database and query for potential hypotheses
     setLoading(true)
-    const result: unknown = await searchForPotentialHypotheses({
-        userReports,
-        methodCoverage,
+
+    const result: Array<Hypothesis> = await searchForPotentialHypotheses({
+        userReport,
+        coverage,
     })
     setLoading(false)
     setHypotheses(result)
 }
 const useContext = (
     methodCoverage: Array<MethodCoverage>,
-    userReports: unknown,
-    setUserReports: unknown,
-    setHypotheses: unknown
+    userReports: string,
+    setUserReport: React.Dispatch<React.SetStateAction<string>>,
+    setHypotheses: React.Dispatch<React.SetStateAction<Array<Hypothesis>>>
 ): ReactElement => {
     const [loading, setLoading] = React.useState(false)
 
@@ -36,7 +37,7 @@ const useContext = (
         return (
             <>
                 <Trace coverage={methodCoverage} />
-                <Questions setDefectContext={setUserReports} />
+                <Questions setDefectContext={setUserReport} />
 
                 <LoadingButton
                     variant="contained"
@@ -66,7 +67,7 @@ export const App: React.FC = (): React.ReactElement => {
     const [methodCoverage, setMethodCoverage] = React.useState<
         Array<MethodCoverage>
     >([])
-    const [userReports, setUserReports] = React.useState<Array<unknown>>([])
+    const [userReport, setUserReport] = React.useState<string>('')
     const [hypotheses, setHypotheses] = React.useState<Array<Hypothesis>>([])
 
     return (
@@ -76,8 +77,8 @@ export const App: React.FC = (): React.ReactElement => {
             <Recorder setMethodCoverage={setMethodCoverage} />
             {useContext(
                 methodCoverage,
-                userReports,
-                setUserReports,
+                userReport,
+                setUserReport,
                 setHypotheses
             )}
             <div className="Hypotheses">
